@@ -14,6 +14,6 @@ echo $fruits[1] . "\n";  // Output: banana
 foreach ($fruits as $fruit) {
     echo $fruit . ', ';
 }
-// Output: apple, banana, orange, grape,
+// Output: apple,  banana, orange, grape,
 
 ?>
