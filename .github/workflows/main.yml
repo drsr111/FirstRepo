@@ -16,6 +16,7 @@ jobs:
         uses: softprops/action-gh-release@v1
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/v')  # Updated condition
+        if: startsWith(github.ref, 'refs/tags/v1')  # Updated condition
         with:
+          tag_name: test
           files: Release.txt
