@@ -6,6 +6,10 @@ on:
         inputs:
             upload:
               description: 'Do you wanna upload app to github?'
+              type: choice
+              options: 
+                - Yes
+                - No
               required: true
               default: 'No'
 
