@@ -4,9 +4,15 @@ name: Main
 on:
   workflow_dispatch:
     inputs:
-      run_release_step:
-        description: 'Run the Release/upload app to github step'
-        required: false
+      name:
+        type: choice
+        description: Want to upload apk to github?
+        options: 
+        - Yes
+        - No
+      message:
+        required: true
+
 
 jobs:
   build:
@@ -19,13 +25,16 @@ jobs:
       - name: Test
         run: cat Release.txt
       - name: Generate release tag
+        if: github.event.inputs.name == 'Yes'
         id: tag
         run: |
           echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
       - name: Move source code (if needed)
+        if: github.event.inputs.name == 'Yes'
         run: |
           mv /path/to/source/code/* /temp_directory/
       - name: Release user firmware
+        if: github.event.inputs.name == 'Yes'
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
