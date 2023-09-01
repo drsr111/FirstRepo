@@ -8,7 +8,6 @@ on:
               description: 'Do you want to release/upload to Github'
               required: true
               default: 'No'
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,16 +17,12 @@ jobs:
       - name: Build
         run: echo ${{ github.sha }} > Release.txt
       - name: Test
-        run: cat Release.txt && echo ${{github.event.inputs.upload}}
+        run: cat Release.txt
       - name: Generate release tag
         if: github.event.inputs.upload_to_github == 'Yes'
         id: tag
         run: |
           echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
-      - name: Move source code (if needed)
-        if: github.event.inputs.upload_to_github == 'Yes'
-        run: |
-          mv /path/to/source/code/* /temp_directory/
       - name: Release user firmware
         if: github.event.inputs.upload_to_github == 'Yes'
         uses: softprops/action-gh-release@v1
