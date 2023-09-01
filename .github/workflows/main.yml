@@ -18,7 +18,7 @@ jobs:
       - name: Build
         run: echo ${{ github.sha }} > Release.txt
       - name: Test
-        run: cat Release.txt
+        run: cat Release.txt && echo ${{github.event.inputs.upload}}
       - name: Generate release tag
         if: github.event.inputs.project_name == 'Yes'
         id: tag
