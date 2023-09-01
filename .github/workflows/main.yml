@@ -14,10 +14,15 @@ jobs:
         run: cat Release.txt
       - name: Install Upload Release Assets Action
         uses: softprops/action-gh-release@v1
-      - name: Release
+      - name: Generate release tag
+        id: tag
+        run: |
+          echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
+      - name: Release user firmware
         uses: softprops/action-gh-release@v1
-        #if: startsWith(github.ref, 'refs/tags/v1')  # Updated condition
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: test
-          files: Release.txt
-        
+          tag_name: ${{ steps.tag.outputs.release_tag }}
+          files: |
+            Release.txt        
