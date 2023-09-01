@@ -12,15 +12,15 @@ jobs:
         run: echo ${{ github.sha }} > Release.txt
       - name: Test
         run: cat Release.txt
-      - name: Generate release/github tag
+      - name: Generate release tag
         id: tag
         run: |
-          echo "::set-output name=release_tag::AppName_$(date +"%Y.%m.%d_%H-%M")"
-      - name: Release/upload app to github
+          echo "RELEASE_TAG=UserBuild_$(date +"%Y.%m.%d_%H-%M")" >> $GITHUB_ENV
+      - name: Release user firmware
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.tag.outputs.release_tag }}
+          tag_name: ${{ env.RELEASE_TAG }}
           files: |
             Release.txt
