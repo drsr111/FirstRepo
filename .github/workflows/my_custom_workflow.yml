@@ -11,4 +11,4 @@ jobs:
     # Include the reusable workflow from reusable.yml
     steps:
       - name: Include Reusable Workflow
-        uses: drsr111/FirstRepo/blob/master/action.yml@main
+        uses: drsr111/FirstRepo/blob/master/action.yml@v1
