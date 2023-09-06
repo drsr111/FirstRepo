@@ -1,0 +1,15 @@
+name: My Custom Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  my_custom_job:
+    runs-on: ubuntu-latest
+
+    # Include the reusable workflow from reusable.yml
+    steps:
+      - name: Include Reusable Workflow
+        uses: ./.github/workflows/reusable.yml
