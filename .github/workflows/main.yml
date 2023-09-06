@@ -25,7 +25,7 @@ jobs:
           echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
       - name: Release user firmware
         if: github.event.inputs.upload_to_github == 'Yes'
-        uses: ./.github/workflows/reuse.yml@v1
+        uses: ./.github/workflows/reuse.yml@main
         #uses: softprops/action-gh-release@v1
         #env:
         #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
