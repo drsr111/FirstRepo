@@ -9,27 +9,10 @@ on:
               required: true
               default: 'No'
 jobs:
-  build:
+  my_custom_job:
     runs-on: ubuntu-latest
+
+    # Include the reusable workflow from reusable.yml
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Build
-        run: echo ${{ github.sha }} > Release.txt
-      - name: Test
-        run: cat Release.txt
-      - name: Generate release tag
-        if: github.event.inputs.upload_to_github == 'Yes'
-        id: tag
-        run: |
-          echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
-      - name: Release user firmware
-        if: github.event.inputs.upload_to_github == 'Yes'
-        uses: ./.github/workflows/reuse.yml@main
-        #uses: softprops/action-gh-release@v1
-        #env:
-        #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        #with:
-       #   tag_name: ${{ steps.tag.outputs.release_tag }}
-       #   files: |
-       #     Release.txt
+      - name: Include Reusable Workflow
+        uses: ./.github/workflows/reusable.yml
