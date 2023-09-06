@@ -1,0 +1,6 @@
+jobs:
+  send-slack-notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send custom JSON data to Slack workflow
+        run: echo "hello from reusable yaml"
