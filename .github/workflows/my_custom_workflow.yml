@@ -1,9 +1,8 @@
 name: My Custom Workflow
 
 on:
-  push:
-    branches:
-      - main
+    workflow_dispatch:
+
 
 jobs:
   my_custom_job:
