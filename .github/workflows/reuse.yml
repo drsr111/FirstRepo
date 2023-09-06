@@ -1,0 +1,18 @@
+name: Reusable workflow example
+
+on:
+  workflow_call
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release user firmware
+        if: github.event.inputs.upload_to_github == 'Yes'
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag.outputs.release_tag }}
+          files: |
+            Release.txt
