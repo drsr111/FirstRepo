@@ -15,4 +15,4 @@ jobs:
     # Include the reusable workflow from reusable.yml
     steps:
       - name: Include Reusable Workflow
-        uses: ./.github/workflows/reusable.yml
+        uses: action.yml@main
