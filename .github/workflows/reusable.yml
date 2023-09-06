@@ -1,0 +1,27 @@
+name: Reusable Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and Test
+        run: |
+          # Replace this with your build and test commands
+          echo "Building and testing your application..."
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to Production
+        run: |
+          # Replace this with your deployment commands
+          echo "Deploying your application to production..."
