@@ -1,7 +1,7 @@
 name: "Echo action.yml"
 
 runs:
-	using: "composite"
-	steps:
-	 -name: hello world
-	  run: echo "hiiiiiiiiiiiiiiiiiiii"
+ using: "composite"
+ steps:
+  -name: hello world
+   run: echo "hiiiiiiiiiiiiiiiiiiii"
