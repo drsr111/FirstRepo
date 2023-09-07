@@ -1,7 +1,27 @@
-name: "Echo action.yml"
+name: Send Slack Notification
 
-runs:
- using: "composite"
- steps:
-   - name: hello world
-     uses: actions/checkout@v2
+on:
+  workflow_run:
+    workflows: ["Main"]  # Replace "YourWorkflowName" with the name of your main workflow
+
+jobs:
+  send-slack-notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack Notification
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Job status: :arrow_right: *${{job.status}}*\n\nJob url: :globe_with_meridians: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n\nJob run by: :bust_in_silhouette: ${{github.actor}} \n\nJob Name: :fast_forward: ${{ github.job }}\n\nJob run on branch: :cactus: ${{github.ref}}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
