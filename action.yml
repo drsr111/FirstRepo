@@ -1,7 +1,18 @@
-name: "Echo action.yml"
+name: Main
 
-runs:
-	using: "composite"
-	steps:
-	 -name: hello world
-	  run: echo "hiiiiiiiiiiiiiiiiiiii"
+#on: push
+on:
+    workflow_dispatch:
+        inputs:
+            upload_to_github:
+              description: 'Do you want to release/upload to Github'
+              required: true
+              default: 'No'
+jobs:
+  my_custom_job:
+    runs-on: ubuntu-latest
+
+    # Include the reusable workflow from reusable.yml
+    steps:
+        - name: call template
+          uses: ./.github/workflows/actions@master
