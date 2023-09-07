@@ -15,4 +15,4 @@ jobs:
     # Include the reusable workflow from reusable.yml
     steps:
         - name: call template
-          uses: ./.github/workflows/slack-notification-template.yml
+          uses: ./.github/workflows/actions@master
